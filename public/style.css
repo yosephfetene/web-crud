@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #222;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+#movies {
+  display: grid;
+  gap: 15px;
+}
+
+.movie-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card h3 {
+  margin: 0 0 5px 0;
+}
+
+.movie-card .meta {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 8px;
+}
+
+.movie-card .rating {
+  color: #e67e22;
+  font-weight: bold;
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "The Shawshank Redemption",
+    "director": "Frank Darabont",
+    "year": 1994,
+    "rating": 9.3,
+    "review": "A powerful story of hope and friendship inside a prison."
+  },
+  {
+    "id": 2,
+    "title": "Inception",
+    "director": "Christopher Nolan",
+    "year": 2010,
+    "rating": 8.8,
+    "review": "A mind-bending heist movie that takes place inside dreams."
+  },
+  {
+    "id": 3,
+    "title": "Spirited Away",
+    "director": "Hayao Miyazaki",
+    "year": 2001,
+    "rating": 8.6,
+    "review": "A magical animated journey through a hidden spirit world."
+  }
+]
