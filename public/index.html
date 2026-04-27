@@ -13,14 +13,17 @@
 
   <main>
     <section id="add-movie">
-      <h2>Add a Movie</h2>
+      <h2 id="form-title">Add a Movie</h2>
       <form id="movie-form">
         <input type="text" id="title" placeholder="Title" required />
         <input type="text" id="director" placeholder="Director" required />
         <input type="number" id="year" placeholder="Year" />
         <input type="number" step="0.1" id="rating" placeholder="Rating (0-10)" />
         <textarea id="review" placeholder="Your review..."></textarea>
-        <button type="submit">Add Movie</button>
+        <div class="form-buttons">
+          <button type="submit" id="submit-btn">Add Movie</button>
+          <button type="button" id="cancel-btn" class="hidden">Cancel</button>
+        </div>
         <p id="form-message"></p>
       </form>
     </section>
