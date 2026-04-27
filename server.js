@@ -11,9 +11,30 @@ function readMovies() {
   return JSON.parse(raw);
 }
 
+function writeMovies(movies) {
+  fs.writeFileSync(DATA_FILE, JSON.stringify(movies, null, 2));
+}
+
 function sendJSON(res, statusCode, data) {
   res.writeHead(statusCode, { "Content-Type": "application/json" });
   res.end(JSON.stringify(data));
+}
+
+function parseBody(req) {
+  return new Promise((resolve, reject) => {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+    req.on("end", () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (err) {
+        reject(err);
+      }
+    });
+    req.on("error", reject);
+  });
 }
 
 function serveStatic(req, res) {
@@ -39,7 +60,7 @@ function serveStatic(req, res) {
   });
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const { method, url } = req;
 
   if (method === "GET" && url === "/movies") {
@@ -48,6 +69,53 @@ const server = http.createServer((req, res) => {
       sendJSON(res, 200, movies);
     } catch (err) {
       sendJSON(res, 500, { error: "Could not read movies file." });
+    }
+    return;
+  }
+
+  const movieIdMatch = url.match(/^\/movies\/(\d+)$/);
+  if (method === "GET" && movieIdMatch) {
+    const id = parseInt(movieIdMatch[1], 10);
+    try {
+      const movies = readMovies();
+      const movie = movies.find((m) => m.id === id);
+      if (!movie) {
+        sendJSON(res, 404, { error: "Movie not found." });
+        return;
+      }
+      sendJSON(res, 200, movie);
+    } catch (err) {
+      sendJSON(res, 500, { error: "Could not read movies file." });
+    }
+    return;
+  }
+
+  if (method === "POST" && url === "/movies") {
+    try {
+      const body = await parseBody(req);
+      const { title, director, year, rating, review } = body;
+
+      if (!title || !director) {
+        sendJSON(res, 400, { error: "Title and director are required." });
+        return;
+      }
+
+      const movies = readMovies();
+      const newId = movies.length > 0 ? Math.max(...movies.map((m) => m.id)) + 1 : 1;
+      const newMovie = {
+        id: newId,
+        title,
+        director,
+        year: year || null,
+        rating: rating || null,
+        review: review || "",
+      };
+
+      movies.push(newMovie);
+      writeMovies(movies);
+      sendJSON(res, 201, newMovie);
+    } catch (err) {
+      sendJSON(res, 400, { error: "Invalid request body." });
     }
     return;
   }

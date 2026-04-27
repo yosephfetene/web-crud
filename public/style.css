@@ -23,6 +23,52 @@ main {
   padding: 0 20px;
 }
 
+#add-movie {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#movie-form {
+  display: grid;
+  gap: 10px;
+}
+
+#movie-form input,
+#movie-form textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+#movie-form textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+#movie-form button {
+  padding: 10px;
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#movie-form button:hover {
+  background-color: #d35400;
+}
+
+#form-message {
+  margin: 0;
+  font-size: 0.9em;
+}
+
 #movies {
   display: grid;
   gap: 15px;
@@ -48,4 +94,9 @@ main {
 .movie-card .rating {
   color: #e67e22;
   font-weight: bold;
+}
+
+.movie-card small {
+  color: #999;
+  font-size: 0.8em;
 }

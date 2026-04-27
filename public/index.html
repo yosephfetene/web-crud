@@ -12,6 +12,19 @@
   </header>
 
   <main>
+    <section id="add-movie">
+      <h2>Add a Movie</h2>
+      <form id="movie-form">
+        <input type="text" id="title" placeholder="Title" required />
+        <input type="text" id="director" placeholder="Director" required />
+        <input type="number" id="year" placeholder="Year" />
+        <input type="number" step="0.1" id="rating" placeholder="Rating (0-10)" />
+        <textarea id="review" placeholder="Your review..."></textarea>
+        <button type="submit">Add Movie</button>
+        <p id="form-message"></p>
+      </form>
+    </section>
+
     <section id="movie-list">
       <h2>All Movies</h2>
       <div id="movies"></div>
